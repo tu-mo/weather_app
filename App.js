@@ -3,14 +3,23 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, } from 'react-native';
 import * as Location from 'expo-location';
 
-import DateTime from './components/DateTime';
+import Weather from './components/Weather';
 import WeatherScroll from './components/WeatherScroll';
 
 const API_KEY = 'c16d2f62c5d3d5434f4ac207aa69c694';
 
 export default function App() {
+  let img = require('./assets/day.jpg')
   const [data, setData] = useState({});
+  const [data_current, setData_current] = useState({});
 
+  const [time, setTime] = useState('')
+  if (time >= 18 | time <= 5) {
+    img = require('./assets/night.jpg')
+  } else {
+    img = require('./assets/day.jpg')
+  }
+  
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -23,8 +32,15 @@ export default function App() {
       let location = await Location.getCurrentPositionAsync({});
       fetchDataFromApi(location.coords.latitude, location.coords.longitude);
     })();
+    setInterval(() => {
+      const time = new Date();
+      const hour = time.getHours();
+      setTime(hour) 
+      
+     
+  }, 1000);
   }, [])
-
+  
   const fetchDataFromApi = (latitude, longitude) => {
     if (latitude && longitude) {
       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=metric&appid=${API_KEY}`).then(res => res.json()).then(data => {
@@ -33,19 +49,23 @@ export default function App() {
         // document.write(data.timezone)
         setData(data)
       })
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`).then(res => res.json()).then(data_current => {
+
+        console.log(data_current)
+        // document.write(data.timezone)
+        setData_current(data_current)
+      })
     }
 
   }
   return (
 
     <View style={styles.container}>
-      <ImageBackground source={require('./assets/cloudy.jpeg')} style={styles.image}>
-
-        <DateTime current={data.current} lat={data.lat} lon={data.lon} />
+      <ImageBackground source={img} style={styles.image}>
+        <Weather current={data_current} cur={data.current} />
         {/* <DailyScroll weatherData={data.hourly} current={data.current}/> */}
         <WeatherScroll weatherData={data} current={data.current} />
         <Text style={styles.menu}>PINEAPPLE</Text>
-
       </ImageBackground>
     </View>
   );

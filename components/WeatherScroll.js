@@ -18,15 +18,15 @@ const WeatherScroll = ({ weatherData, current }) => {
                 <FutureDaily data={weatherData.daily} />
                 <View style={styles.day}>
                     <View style={styles.line_top}></View>
-                        <WeatherItem title="Sunrise" value={current ? moment.tz(current.sunrise * 1000, weatherData.timezone).format('HH:mm') : ""} unit=" am" />
-                        <WeatherItem title="Sunset" value={current ? moment.tz(current.sunset * 1000, weatherData.timezone).format('HH:mm') : ""} unit=" pm" />
-                        <WeatherItem title="Humidity" value={current ? current.humidity : ""} unit='%' />
-                        <WeatherItem title="Pressure" value={current ? current.pressure : ""} unit=" hPA" />
-                        <WeatherItem title="Feels_like" value={current ? current.feels_like : ""} unit="&#176;" />
-                        <WeatherItem title="Uvi" value={current ? current.uvi : ""} unit="" />
-                        <WeatherItem title="Wind_speed" value={current ? Math.round(current.wind_speed * 3.6 * 10) / 10  : ""} unit=" km/h" />
-                        <WeatherItem title="Visibility" value={current ? Math.round(current.visibility / 1000 * 10) / 10 : ""} unit="km" />
-                    </View>
+                    <WeatherItem title="Sunrise" value={current ? moment.tz(current.sunrise * 1000, weatherData.timezone).format('HH:mm') : ""} unit=" am" />
+                    <WeatherItem title="Sunset" value={current ? moment.tz(current.sunset * 1000, weatherData.timezone).format('HH:mm') : ""} unit=" pm" />
+                    <WeatherItem title="Humidity" value={current ? current.humidity : ""} unit='%' />
+                    <WeatherItem title="Pressure" value={current ? current.pressure : ""} unit=" hPA" />
+                    <WeatherItem title="Feels like" value={current ? Math.round(current.feels_like) : ""} unit="&#176;" />
+                    <WeatherItem title="Uvi" value={current ? current.uvi : ""} unit="" />
+                    <WeatherItem title="Wind speed" value={current ? Math.round(current.wind_speed * 3.6 * 10) / 10  : ""} unit=" km/h" />
+                    <WeatherItem title="Visibility" value={current ? Math.round(current.visibility / 1000 * 10) / 10 : ""} unit="km" />
+                </View>
             </ScrollView>
             
         </>
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         
     },
     today_scroll: {
-        
+        backgroundColor: '#00000033',
         // borderTopWidth: 1,
         // borderColor: '#eee',
         paddingTop: 5,
@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
         borderColor: '#eee',
     },
     image: {
-        width: 30,
-        height: 30
+        width: 40,
+        height: 40
     },
     currentTempContainer: {
         flexDirection: 'column',

@@ -90,9 +90,12 @@ const styles = StyleSheet.create({
     image: {
         // flex:1,
         // flexGrow:1,
-        width: 30,
-        height: 30,
-        // textAlign:"center"
+        width: 40,
+        height: 40,
+        // textAlign:"center",
+        // ustifyContent: 'space-between',
+        // alignItems: 'center'
+        resizeMode:'contain'
     },
     dailyItem: {
         flex: 2,
@@ -100,6 +103,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        textAlignVertical:'center',
         // backgroundColor: '#00000033',
         // borderRadius:10,
         // borderColor:"#eee",
@@ -123,9 +127,10 @@ const styles = StyleSheet.create({
     day: {
         fontSize: 20,
         color: "white",
+        // alignSelf:'baseline',
         // backgroundColor: "#3c3c44",
         // padding: 10,
-        // textAlign:'center',
+        textAlign:'left',
         // borderRadius: 50,
         fontWeight: "500",
         // marginBottom: 15
@@ -134,7 +139,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "white",
         fontWeight: "500",
-        // textAlign:"center"
     },
 })
 
