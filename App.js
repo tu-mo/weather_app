@@ -133,15 +133,9 @@ export default function App() {
     const db = getDatabase();
     const starCountRef = ref(db, 'city/');
     onValue(starCountRef, (snapshot) => {
-
       var i = 0
       let item_data = snapshot.val();
-
-
       let data_temp = []
-
-
-
       data_temp.push({
         id: Object.keys(item_data)[i],
         name: Object.values(item_data)[i].City
@@ -212,7 +206,7 @@ export default function App() {
                     value={city}
                     onChangeText={(text) => setCity(text)}
                   />
-                  <EvilIcons name="search" size={28} color="black" onPress={() => fetchData(city), addCity(city)} />
+                  <EvilIcons name="search" size={28} color="black" onPress={() => fetchData(city)z} />
                 </View>
                 <View style={{ marginTop: 95 }}></View>
                 <Weather current={data_current} cur={data.current} />

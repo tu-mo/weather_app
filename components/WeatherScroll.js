@@ -34,7 +34,7 @@ const WeatherScroll = ({ weatherData, current, air }) => {
                     <WeatherItem title="SO2" value={air.list[0].component.so2} unit={" ppm"}/>
                     <WeatherItem title="PM2_5" value={air.list[0].component.pm2_5} unit={" ppm"}/>
                     <WeatherItem title="PM10" value={air.list[0].component.pm10} unit={" ppm"}/>
-                    <WeatherItem title="NH3" unit={"ppm"}/>
+                    <WeatherItem title="NH3" value={air.list[0].component.} unit={"ppm"}/>
                 </View>
             </ScrollView>
             
