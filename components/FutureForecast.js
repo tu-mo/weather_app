@@ -57,10 +57,8 @@ const FutureHourlyItem = ({ next, hourlyItem }) => {
     const img = { uri: "http://openweathermap.org/img/wn/" + hourlyItem.weather[0].icon + "@2x.png" }
     return (
         <View style={styles.hourlyItem}>
-            {/* <Text  style={styles.day}>{moment(hourlyItem.dt * 1000).format('ddd')}</Text> */}
             <Text style={styles.day}>{next < 10 ? '0' + next : next}</Text>
             <Image source={img} style={styles.image} />
-            {/* <Text  style={styles.temp}>Night - {hourlyItem.temp.night}&#176;C</Text> */}
             <Text style={styles.temp}>{Math.round(hourlyItem.temp)}&#176;</Text>
 
         </View>
