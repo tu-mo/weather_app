@@ -13,14 +13,9 @@ const FutureDaily = ({ data }) => {
 
                         (id > 0) && <FutureDailyItem key={id} dailyItem={data} />
                     ))
-
                     :
-
                     <View />
             }
-
-
-
         </View>
     )
 }
@@ -39,13 +34,8 @@ const FutureDailyItem = ({ dailyItem }) => {
 }
 
 const FutureHourly = ({ data }) => {
-
-
     const time = new Date();
     const hour = time.getHours();
-
-
-
     return (
         <View style={{ flexDirection: 'row' }}>
 
@@ -55,22 +45,15 @@ const FutureHourly = ({ data }) => {
                     data.map((data, idx) => (
 
                         idx < 24 && <FutureHourlyItem hourlyItem={data} key={idx} next={(hour + idx + 1) < 24 ? (hour + idx + 1) : ((hour + idx + 1) - 24)} />
-
                     ))
-
                     :
-
                     <View />
             }
-
-
-
         </View>
     )
 }
 
 const FutureHourlyItem = ({ next, hourlyItem }) => {
-
     const img = { uri: "http://openweathermap.org/img/wn/" + hourlyItem.weather[0].icon + "@2x.png" }
     return (
         <View style={styles.hourlyItem}>
@@ -85,17 +68,12 @@ const FutureHourlyItem = ({ next, hourlyItem }) => {
 }
 
 export { FutureHourly, FutureDaily }
-
 const styles = StyleSheet.create({
     image: {
-        // flex:1,
-        // flexGrow:1,
         width: 40,
         height: 40,
-        // textAlign:"center",
-        // ustifyContent: 'space-between',
-        // alignItems: 'center'
-        resizeMode:'contain'
+        justifyContent: 'space-between',
+        resizeMode: 'contain'
     },
     dailyItem: {
         flex: 2,
@@ -103,37 +81,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        textAlignVertical:'center',
-        // backgroundColor: '#00000033',
-        // borderRadius:10,
-        // borderColor:"#eee",
-        // borderWidth:1,
+        textAlignVertical: 'center',
         paddingTop: 5,
-        paddingBottom:5
-        // marginLeft: 10
+        paddingBottom: 5
     },
     hourlyItem: {
-        // flex:1,
         flexDirection: 'column',
         justifyContent: 'center',
-        // backgroundColor: '#00000033',
         alignItems: 'center',
-        // borderRadius:10,
-        // borderColor:"#eee",
-        // borderWidth:1,
         padding: 20,
-        // marginLeft: 10
     },
     day: {
         fontSize: 20,
         color: "white",
-        // alignSelf:'baseline',
-        // backgroundColor: "#3c3c44",
-        // padding: 10,
-        textAlign:'left',
-        // borderRadius: 50,
+        width: 50,
+        textAlign: 'left',
         fontWeight: "500",
-        // marginBottom: 15
     },
     temp: {
         fontSize: 20,

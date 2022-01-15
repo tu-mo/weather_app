@@ -3,7 +3,7 @@ import { View, ScrollView, Image, Text, StyleSheet } from 'react-native'
 import { FutureDaily, FutureHourly } from './FutureForecast'
 import moment from 'moment-timezone'
 
-const WeatherScroll = ({ weatherData, current }) => {
+const WeatherScroll = ({ weatherData, current, air }) => {
     return (
         <>
             <View>
@@ -26,6 +26,15 @@ const WeatherScroll = ({ weatherData, current }) => {
                     <WeatherItem title="Uvi" value={current ? current.uvi : ""} unit="" />
                     <WeatherItem title="Wind speed" value={current ? Math.round(current.wind_speed * 3.6 * 10) / 10  : ""} unit=" km/h" />
                     <WeatherItem title="Visibility" value={current ? Math.round(current.visibility / 1000 * 10) / 10 : ""} unit="km" />
+                    <View style={styles.line_top}></View>
+                    <WeatherItem title="CO" value={air.list[0].component.co} unit={" ppm"}/>
+                    <WeatherItem title="NO" value={air.list[0].component.no} unit={" ppm"}/>
+                    <WeatherItem title="NO2" value={air.list[0].component.no2} unit={" ppm"}/>
+                    <WeatherItem title="O3" value={air.list[0].component.o3} unit={" ppm"}/>
+                    <WeatherItem title="SO2" value={air.list[0].component.so2} unit={" ppm"}/>
+                    <WeatherItem title="PM2_5" value={air.list[0].component.pm2_5} unit={" ppm"}/>
+                    <WeatherItem title="PM10" value={air.list[0].component.pm10} unit={" ppm"}/>
+                    <WeatherItem title="NH3" unit={"ppm"}/>
                 </View>
             </ScrollView>
             
@@ -64,9 +73,6 @@ const TodayItem = ({ todayItem }) => {
     return (
         <View style={styles.today}>
             <Text style={styles.day}>{moment(todayItem.dt * 1000).format('ddd')}    Today</Text>
-
-            {/* <Image source={img} style={styles.image} /> */}
-            {/* <Text  style={styles.temp}>Night - {dailyItem.temp.night}&#176;C</Text> */}
             <Text style={styles.day}>{Math.round(todayItem.temp.max)}  {Math.round(todayItem.temp.min)}</Text>
 
         </View>
@@ -79,10 +85,7 @@ const CurrentTemp = ({ data }) => {
             <View style={styles.currentTempContainer}>
                 <Text style={styles.day}>Now</Text>
                 <Image source={img} style={styles.image} />
-                {/* <Text  style={styles.day}>{moment(data.dt * 1000).format('dddd')}</Text> */}
                 <Text style={styles.day}>{Math.round(data.temp)}&#176;</Text>
-                {/* <Text  style={styles.temp}>Day - {data.temp.day}&#176;C</Text> */}
-
             </View>
         )
     } else {
@@ -100,8 +103,6 @@ const styles = StyleSheet.create({
     scrollViewRow: {
         flex: 0.4,
         flexGrow: 0.2,
-        // backgroundColor: '#00000033',
-        // padding:20,
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: '#eee',
@@ -110,7 +111,6 @@ const styles = StyleSheet.create({
     scrollViewColumn: {
         flex: 1,
         flexGrow: 0.8,
-        // backgroundColor: '#00000033',
         paddingLeft: 20,
         paddingRight: 20,
         borderBottomWidth: 1,
@@ -120,26 +120,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // backgroundColor: '#00000033',
-        // borderRadius:10,
-        // borderColor:"#eee",
-        // borderWidth:1,
         paddingLeft: 20,
         paddingRight: 20,
         
     },
     today_scroll: {
         backgroundColor: '#00000033',
-        // borderTopWidth: 1,
-        // borderColor: '#eee',
         paddingTop: 5,
         paddingBottom: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // justifyContent:'space-between'
     },
     line_top: {
+        
         borderTopWidth: 1,
         borderColor: '#eee',
     },
@@ -149,24 +143,16 @@ const styles = StyleSheet.create({
     },
     currentTempContainer: {
         flexDirection: 'column',
-        // backgroundColor: '#00000033',
         justifyContent: "center",
         alignItems: 'center',
-        // borderRadius: 10,
-        // borderColor:'#eee',
-
-        // borderWidth:1,
         padding: 20
     },
     day: {
         fontSize: 20,
         color: "white",
-        // backgroundColor: "#3c3c44",
-        // padding: 10,
-        // textAlign:"center",
-        // borderRadius: 50,
+        justifyContent: 'space-between',
+        textAlign:"center",
         fontWeight: "700",
-        // marginBottom: 15
     },
     day_mini: {
         paddingLeft: 40,
@@ -174,7 +160,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "white",
         fontWeight: "500",
-        // textAlign:"center"
     },
     otherContainer: {
         paddingRight: 40
